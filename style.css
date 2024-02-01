@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    font-size: 1.5rem;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px;
+}
+#icon {
+    display: none;
+}
+
+@media(max-width:700px) {
+    ul {
+        display: none;
+    }
+    #icon {
+        display: block;
+    }
+}
+
+#img {
+    height: 600%;
+    width: 100%;
+}
