@@ -153,21 +153,48 @@ const questions = [
     }
 ];
 
-console.log(questions);
-
-
 // GET HTML ELEMENT IN JAVASCRIPT
 let Quiz_Question = document.querySelector('#Quiz_Question')
-let Question_index = document.querySelector('#Question_index')
 let next_btn = document.querySelector('#next_btn')
 let label_div = document.querySelector('#label_div')
 
-let index = 0
-let result = 0
-let totalMarks = 100
+let currenIndex = 0
+let rightAnswer = 0
+let wrongAnswer = 0
 
-next_btn.addEventListener('click', ()=> {
-    console.log(questions);
+let renderScreen = () => {
+    label_div.innerHTML = ''
+    let typescriptQuiz = questions[currenIndex].question
+    // console.log(typescriptQuiz);
+    Quiz_Question.innerHTML = `Q${currenIndex + 1}
+    ${typescriptQuiz}
+    `
+    let option = questions[currenIndex].options
+    option.map(item => {
+        label_div.innerHTML += `
+        <label class="bg-primary label_radio p-3">
+            <input type="radio" name="${currenIndex}" value="${item}">
+            <span>${item}</span>
+          </label>
+        `
+    })
+}
+renderScreen()
+
+next_btn.addEventListener('click', () => {
+    let selected = document.querySelector(`input[name='${currenIndex}']:checked`)
+    if (selected) {
+        if (selected.value === questions[currenIndex].answer) {
+            rightAnswer++
+            // console.log(rightAnswer);
+        } else {
+            wrongAnswer++
+            // console.log(wrongAnswer);
+        }
+    }
+
+    currenIndex++
+    renderScreen()
 })
 
 
