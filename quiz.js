@@ -19,9 +19,9 @@ let logoutBtn = document.querySelector('#logoutBtn')
 
 logoutBtn.addEventListener('click', () => {
     signOut(auth).then(() => {
-        alert('Sign-out successful.')
+        console.log('Sign-out successful.');
     }).catch((error) => {
-        alert('An error happened.')
+        console.log('An error happened.');
     });
 })
 
@@ -157,6 +157,8 @@ const questions = [
 let Quiz_Question = document.querySelector('#Quiz_Question')
 let next_btn = document.querySelector('#next_btn')
 let label_div = document.querySelector('#label_div')
+let main_div = document.querySelector('.main-div')
+let result_div = document.querySelector('#result_div')
 
 let currenIndex = 0
 let rightAnswer = 0
@@ -170,6 +172,7 @@ let renderScreen = () => {
     ${typescriptQuiz}
     `
     let option = questions[currenIndex].options
+    console.log(option);
     option.map(item => {
         label_div.innerHTML += `
         <label class="label_radio text-black shadow p-3">
@@ -192,8 +195,14 @@ next_btn.addEventListener('click', () => {
             // console.log(wrongAnswer);
         }
     }
+    if(currenIndex === 18){
+        next_btn.innerHTML = 'SUBMIT'
+        main_div.style.display = 'none'
+        result_div.style.display = 'flex'
+    }
 
     currenIndex++
+    console.log(currenIndex);
     renderScreen()
 })
 

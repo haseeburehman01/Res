@@ -39,7 +39,7 @@ form.addEventListener('submit', event => {
         })
         .catch((error) => {
             const errorMessage = error.message;
-            alert(errorMessage);
+            console.log(errorMessage);
         });
 
         email.value = ''
