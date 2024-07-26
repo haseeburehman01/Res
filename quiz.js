@@ -172,7 +172,7 @@ let renderScreen = () => {
     let option = questions[currenIndex].options
     option.map(item => {
         label_div.innerHTML += `
-        <label class="bg-primary label_radio p-3">
+        <label class="label_radio text-black shadow p-3">
             <input type="radio" name="${currenIndex}" value="${item}">
             <span>${item}</span>
           </label>
