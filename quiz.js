@@ -3,7 +3,7 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 import { auth } from "./config.js";
 
 onAuthStateChanged(auth, (user) => {
-let user_img = document.querySelector('#user_img')
+    let user_img = document.querySelector('#user_img')
 
     if (user) {
         // User is signed in, see docs for a list of available properties
@@ -195,20 +195,20 @@ next_btn.addEventListener('click', () => {
         if (selected.value === questions[currenIndex].answer) {
             rightAnswer++
             console.log(`rightAnswer ==> ${rightAnswer}`);
+            if (rightAnswer > 10) {
+                congratulation_contents_title.style.color = '#008000'
+                congratulation_contents_title.innerHTML = 'Pass'
+                congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
+            } else {
+                congratulation_contents_title.style.color = '#FF0000'
+                congratulation_contents_title.innerHTML = 'Fail'
+                congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
+            }
         } else {
             wrongAnswer++
             console.log(`wrongAnswer ==> ${wrongAnswer}`);
         }
 
-        if (rightAnswer >= 10) {
-            congratulation_contents_title.style.color = '#008000'
-            congratulation_contents_title.innerHTML = 'Pass'
-        } else {
-            congratulation_contents_title.style.color = '#FF0000'
-            congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
-            congratulation_contents_title.innerHTML = 'Fail'
-        }
-    
         currenIndex++
         if (currenIndex === 20) {
             next_btn.innerHTML = 'SUBMIT'
@@ -216,9 +216,6 @@ next_btn.addEventListener('click', () => {
             result_div.style.display = 'flex'
         }
     }
-
-    
-    console.log(currenIndex);
     renderScreen()
 })
 
