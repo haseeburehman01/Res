@@ -3,11 +3,14 @@ import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/
 import { auth } from "./config.js";
 
 onAuthStateChanged(auth, (user) => {
+let user_img = document.querySelector('#user_img')
+
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        console.log(uid);
+        let userImage = user.photoURL
+        user_img.src = userImage
 
     } else {
         console.log('user login nahi ha');
@@ -159,6 +162,8 @@ let next_btn = document.querySelector('#next_btn')
 let label_div = document.querySelector('#label_div')
 let main_div = document.querySelector('.main-div')
 let result_div = document.querySelector('#result_div')
+let congratulation_contents_title = document.querySelector('.congratulation-contents-title')
+let congratulation_contents_para = document.querySelector('.congratulation-contents-para')
 
 let currenIndex = 0
 let rightAnswer = 0
@@ -189,19 +194,30 @@ next_btn.addEventListener('click', () => {
     if (selected) {
         if (selected.value === questions[currenIndex].answer) {
             rightAnswer++
-            // console.log(rightAnswer);
+            console.log(`rightAnswer ==> ${rightAnswer}`);
         } else {
             wrongAnswer++
-            // console.log(wrongAnswer);
+            console.log(`wrongAnswer ==> ${wrongAnswer}`);
+        }
+
+        if (rightAnswer >= 10) {
+            congratulation_contents_title.style.color = '#008000'
+            congratulation_contents_title.innerHTML = 'Pass'
+        } else {
+            congratulation_contents_title.style.color = '#FF0000'
+            congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
+            congratulation_contents_title.innerHTML = 'Fail'
+        }
+    
+        currenIndex++
+        if (currenIndex === 20) {
+            next_btn.innerHTML = 'SUBMIT'
+            main_div.style.display = 'none'
+            result_div.style.display = 'flex'
         }
     }
-    if(currenIndex === 18){
-        next_btn.innerHTML = 'SUBMIT'
-        main_div.style.display = 'none'
-        result_div.style.display = 'flex'
-    }
 
-    currenIndex++
+    
     console.log(currenIndex);
     renderScreen()
 })
