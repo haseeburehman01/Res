@@ -195,6 +195,15 @@ next_btn.addEventListener('click', () => {
         if (selected.value === questions[currenIndex].answer) {
             rightAnswer++
             console.log(`rightAnswer ==> ${rightAnswer}`);
+            if (rightAnswer > 10) {
+                congratulation_contents_title.style.color = '#008000'
+                congratulation_contents_title.innerHTML = 'Pass'
+                congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
+            } else {
+                congratulation_contents_title.style.color = '#FF0000'
+                congratulation_contents_title.innerHTML = 'Fail'
+                congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
+            }
         } else {
             wrongAnswer++
             console.log(`wrongAnswer ==> ${wrongAnswer}`);
@@ -205,15 +214,6 @@ next_btn.addEventListener('click', () => {
             next_btn.innerHTML = 'SUBMIT'
             main_div.style.display = 'none'
             result_div.style.display = 'flex'
-            if (rightAnswer > 10) {
-                congratulation_contents_title.style.color = '#008000'
-                congratulation_contents_title.innerHTML = 'Pass'
-                congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
-            } else {
-                congratulation_contents_title.style.color = '#FF0000'
-                congratulation_contents_title.innerHTML = 'Fail'
-                congratulation_contents_para.innerHTML = `CORRECT ANSWER ${rightAnswer}`
-            }
         }
     }
     renderScreen()
